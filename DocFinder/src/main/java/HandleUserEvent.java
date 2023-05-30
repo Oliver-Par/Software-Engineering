@@ -1,5 +1,5 @@
 public interface HandleUserEvent {
-    void menueAuswahl();
+    String menueAuswahl();
 
     void menueErstellen();
 

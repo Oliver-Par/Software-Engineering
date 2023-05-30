@@ -7,7 +7,9 @@ public class UI implements HandleUserEvent{
 
     public void menueErstellen(){}
 
-    public void menueAuswahl(){}
+    public String menueAuswahl(){
+        return null;
+    }
 
     public String[] suchparameterEingabe(){
         return suchParameter;

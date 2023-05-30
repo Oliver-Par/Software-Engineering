@@ -1,51 +1,41 @@
 public class EingabeVerarbeitung implements ManageInput{
-    private Node[] nodes;
+    private Dokument[] dokument;
 
     private String dateipfad;
 
-    public EingabeVerarbeitung(Node[] nodes, String dateipfad){
-        this.nodes = nodes;
+    public EingabeVerarbeitung(Dokument[] dokument, String dateipfad){
+        this.dokument = dokument;
         this.dateipfad = dateipfad;
     }
 
-
-    @Override
-    public Node[] sucheDokument(String[] suchParameter) {
-        return new Node[0];
+    public Dokument[] sucheDokument(String[] suchParameter) {
+        return new Dokument[0];
     }
 
-    @Override
     public void erstellePfadabfrage(String auswahl) {
 
     }
 
-    @Override
-    public void addNode(String auswahl) {
+    public void DokumentHinzufuegenNachUser(String auswahl) {
 
     }
 
-    @Override
     public void erstelleKeywordAbfrage() {
 
     }
 
-    @Override
     public boolean bestaetigung() {
         return false;
     }
 
-    @Override
-    public String suchergebnisAnzeigen(Node[] zutreffendeNodes) {
+    public String suchergebnisAnzeigen(Dokument[] zutreffendeDokumente) {
         return null;
     }
 
-    @Override
-    public void dateiOeffnen(Node node) {
+    public void dateiOeffnen(Dokument dokument) {
 
     }
-
-    @Override
-    public void dateiLoeschen(Node node) {
+    public void dateiLoeschen(Dokument dokument) {
 
     }
 }

@@ -3,7 +3,8 @@ public interface SearchData {
 
     void setDokument(Dokument dokument);
 
-    Formular getFormular();
+    boolean saveData(Dokument[] dokuments);
 
-    void setFormular(Formular formular);
+    Dokument[] readData();
+
 }

@@ -1,17 +1,17 @@
 public interface ManageInput {
-    Node[] sucheDokument(String[] suchParameter);
+    Dokument[] sucheDokument(String[] suchParameter);
 
     void erstellePfadabfrage(String auswahl);
 
-    void addNode(String auswahl);
+    void DokumentHinzufuegenNachUser(String auswahl);
 
     void erstelleKeywordAbfrage();
 
     boolean bestaetigung();
 
-    String suchergebnisAnzeigen(Node[] zutreffendeNodes);
+    String suchergebnisAnzeigen(Dokument[] zutreffendeDokuments);
 
-    void dateiOeffnen(Node node);
+    void dateiOeffnen(Dokument dokument);
 
-    void dateiLoeschen(Node node);
+    void dateiLoeschen(Dokument dokument);
 }
