@@ -7,4 +7,6 @@ public interface SearchData {
 
     Dokument[] readData();
 
+
+
 }

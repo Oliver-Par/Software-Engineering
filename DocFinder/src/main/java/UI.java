@@ -1,5 +1,7 @@
-public class UI implements HandleUserEvent{
+public class UI implements HandleUserEvent, Subscriber{
     private String[] suchParameter;
+
+    private String[] ausgabe;
 
     public UI(String[] suchParameter){
         this.suchParameter = suchParameter;
@@ -14,4 +16,6 @@ public class UI implements HandleUserEvent{
     public String[] suchparameterEingabe(){
         return suchParameter;
     }
+
+    public void update(String[] ausgabe){}
 }

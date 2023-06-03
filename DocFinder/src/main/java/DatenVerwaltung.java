@@ -1,5 +1,10 @@
 public class DatenVerwaltung implements SearchData{
-
+    private Dokument[] documents;
+    private Formular[] formulars;
+    private Dokument dok;
+    private Formular form;
+    private Subscriber[] subscribers;
+    private String[] data;
     public Dokument getDokument() {
         return null;
     }
