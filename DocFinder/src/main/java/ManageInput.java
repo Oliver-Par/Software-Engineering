@@ -3,7 +3,7 @@ public interface ManageInput {
 
     void erstellePfadabfrage(String auswahl);
 
-    void DokumentHinzufuegenNachUser(String auswahl);
+    void dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad);
 
     void erstelleKeywordAbfrage();
 
