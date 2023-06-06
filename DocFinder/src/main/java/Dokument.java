@@ -22,4 +22,8 @@ public class Dokument{
     public void setFormular(String[] keyword, String bezeichnung, String wert) {
         this.formular = new Formular(keyword, bezeichnung, wert);
     }
+
+    public String toString(){
+
+    }
 }
