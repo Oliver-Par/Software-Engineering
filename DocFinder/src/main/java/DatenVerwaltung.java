@@ -6,11 +6,11 @@ public class DatenVerwaltung implements SearchData{
     private Subscriber[] subscribers;
     private String[] data;
     public Dokument getDokument() {
-        return null;
+        return dok;
     }
 
     public void setDokument(Dokument dokument) {
-
+        this.dok = dokument;
     }
 
     public boolean saveData(Dokument[] dokuments) {
@@ -19,13 +19,5 @@ public class DatenVerwaltung implements SearchData{
 
     public Dokument[] readData() {
         return new Dokument[0];
-    }
-
-    public Formular getFormular() {
-        return null;
-    }
-
-    public void setFormular(Formular formular) {
-
     }
 }

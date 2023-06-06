@@ -16,9 +16,10 @@ public class Dokument{
         this.dateipfad = dateipfad;
     }
     public Formular getFormular() {
-        return null;
+        return this.formular;
     }
 
-    public void setFormular(Formular formular) {
+    public void setFormular(String[] keyword, String bezeichnung, String wert) {
+        this.formular = new Formular(keyword, bezeichnung, wert);
     }
 }
