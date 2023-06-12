@@ -2,7 +2,6 @@ package daten;
 
 import ui.Subscriber;
 
-import javax.swing.event.DocumentListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +14,17 @@ public class DatenVerwaltung implements SearchData, Serializable {
     private Subscriber[] subscribers;
     private String[] data;
 
-    public DatenVerwaltung(List<Dokument> dokuments, List<Formular> formulars) {
+    public DatenVerwaltung(List<Dokument> dokuments, String[][] keywords, String[] bezeichnung, String[] wert) {
         this.documents = dokuments;
+        this.formulars = new ArrayList<>();
+        int n = 0;
         // Hier muss ich es noch hinbekommen für jedes Dokument das dazugehörige Formular als from zu setzen mit
         // dokument.setFormular() jedoch muss ich schauen wie ich das programmiert bekomme. Dies ist auch der Grund
         // fürs fehlschlagen des Tests 2.
-        this.formulars = formulars;
+        for(Dokument d: dokuments){
+            this.form = d.setFormular(keywords[n], bezeichnung[n], wert[n]);
+            formulars.add(form);
+        }
     }
 
     public List<Dokument> getDokument() {

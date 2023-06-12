@@ -12,4 +12,16 @@ public class Formular {
         this.bezeichnung = bezeichnung;
         this.wert = wert;
     }
+
+    public String[] getKeyword(){
+        return this.keyword;
+    }
+
+    public String getBezeichnung(){
+        return this.bezeichnung;
+    }
+
+    public String getWert(){
+        return this.wert;
+    }
 }
