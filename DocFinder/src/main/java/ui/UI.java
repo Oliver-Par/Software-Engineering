@@ -1,5 +1,7 @@
 package ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UI implements HandleUserEvent, Subscriber {
@@ -11,12 +13,16 @@ public class UI implements HandleUserEvent, Subscriber {
     private String datentyp;
     private String datum;
     private String dateipfad;
+    private String[] keywords;
+    private String keyword;
+    private String bezeichnungFormular;
+    private String wertFormular;
 
-    public UI(){
+    public UI() {
 
     }
 
-    public void menueErstellen(){
+    public void menueErstellen() {
 
         System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
                 "Wählen sie die 2 um ein daten.Dokument zu öffnen!" + "\n" +
@@ -35,7 +41,7 @@ public class UI implements HandleUserEvent, Subscriber {
 
         List<daten.Dokument> dokuments = new ArrayList<daten.Dokument>();
         String pfad = "";
-        system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(dateipfad);
+        system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(pfad);
 
 
         while (!eingabe.equals("5")) {
@@ -54,18 +60,34 @@ public class UI implements HandleUserEvent, Subscriber {
             if (eingabe.equals("3")) {
                 System.out.println("Geben sie den Namen vom daten.Dokument ein");
                 eingabe = sc.nextLine();
-                name=eingabe;
-                System.out.println("Geben sie den Dateityp ein");
-                eingabe = sc.nextLine();
-                datentyp =eingabe;
-                System.out.println("Geben sie das Erstellungsdatum ein");
-                eingabe = sc.nextLine();
-                datum= eingabe;
+                name = eingabe;
+
+                String[] temp = name.split("\\.");
+                datentyp = temp[temp.length - 1];
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                LocalDate localDate = LocalDate.now();
+                datum = localDate.toString();
+
                 System.out.println("Geben sie den Dateipfad ein");
                 eingabe = sc.nextLine();
                 dateipfad = eingabe;
 
-                verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad);
+                System.out.println("Geben sie Keywords ein");
+                eingabe = sc.nextLine();
+                keyword = eingabe;
+
+
+                System.out.println("Geben sie den BezeichnungFormular ein");
+                eingabe = sc.nextLine();
+                bezeichnungFormular = eingabe;
+
+                System.out.println("Geben sie das WertFormular ein");
+                eingabe = sc.nextLine();
+                wertFormular = eingabe;
+
+
+                verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad, keywords, bezeichnungFormular, wertFormular);
 
                 System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");
                 eingabe = sc.nextLine();
@@ -79,9 +101,11 @@ public class UI implements HandleUserEvent, Subscriber {
         }
         return null;
     }
-    public String[] suchparameterEingabe(){
+
+    public String[] suchparameterEingabe() {
         return suchParameter;
     }
 
-    public void update(String[] ausgabe){}
+    public void update(String[] ausgabe) {
+    }
 }

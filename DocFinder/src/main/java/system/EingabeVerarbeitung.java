@@ -7,10 +7,12 @@ import java.util.List;
 public class EingabeVerarbeitung implements ManageInput {
     private List<daten.Dokument> dokuments;
     private String dateipfad;
-    DatenVerwaltung datenVerwaltung = new DatenVerwaltung(dokuments);
+    private String[][] keywords;
+    private String[] bezeichnung;
+    private String[] wert;
+    DatenVerwaltung datenVerwaltung = new DatenVerwaltung(dokuments,keywords,bezeichnung,wert);
 
-    public EingabeVerarbeitung(List<daten.Dokument> dokuments, String dateipfad){
-        this.dokuments = dokuments;
+    public EingabeVerarbeitung(String dateipfad){
         this.dateipfad = dateipfad;
     }
 
