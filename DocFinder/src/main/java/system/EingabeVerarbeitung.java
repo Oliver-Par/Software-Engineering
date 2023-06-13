@@ -1,4 +1,4 @@
-/*package system;
+package system;
 
 import daten.DatenVerwaltung;
 
@@ -46,4 +46,4 @@ public class EingabeVerarbeitung implements ManageInput {
     public void dateiLoeschen(daten.Dokument dokument) {
 
     }
-}*/
+}

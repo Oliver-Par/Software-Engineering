@@ -1,4 +1,4 @@
-/*package ui;
+package ui;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class UI implements HandleUserEvent, Subscriber {
 
         List<daten.Dokument> dokuments = new ArrayList<daten.Dokument>();
         String pfad = "";
-        system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung();
+        system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(dateipfad);
 
 
         while (!eingabe.equals("5")) {
@@ -84,4 +84,4 @@ public class UI implements HandleUserEvent, Subscriber {
     }
 
     public void update(String[] ausgabe){}
-}*/
+}
