@@ -2,10 +2,11 @@ package system;
 
 import daten.DatenVerwaltung;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EingabeVerarbeitung implements ManageInput {
+public class EingabeVerarbeitung implements ManageInput, Serializable {
     private List<daten.Dokument> dokuments= new ArrayList<>();
     private String dateipfad;
     private String[][] keywords;
