@@ -7,7 +7,7 @@ public interface SearchData {
 
     void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert);
 
-    boolean saveData(Dokument[] dokuments);
+    boolean saveData();
 
     List<Dokument> readData();
 

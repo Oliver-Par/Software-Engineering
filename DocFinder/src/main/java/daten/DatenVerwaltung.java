@@ -46,10 +46,10 @@ public class DatenVerwaltung implements SearchData, Serializable {
         formulars.add(formular);
     }
 
-    public boolean saveData(Dokument[] dokuments) {
+    public boolean saveData() {
         try (FileOutputStream fos = new FileOutputStream("save.txt");) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                for (Dokument d : dokuments) {
+                for (Dokument d : this.documents) {
                     try {
                         oos.writeObject(d);
                         oos.flush();
