@@ -107,5 +107,6 @@ public class UI implements HandleUserEvent, Subscriber {
     }
 
     public void update(String[] ausgabe) {
+        //Hallo
     }
 }
