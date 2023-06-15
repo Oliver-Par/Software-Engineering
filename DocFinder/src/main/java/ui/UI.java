@@ -76,7 +76,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 System.out.println("Geben Sie jetzt die vom System angefragten Suchparameter ein: ");
                 suchparameterEingabe();
 
-                System.out.println("Geben sie den BezeichnungFormular ein: ");
+                System.out.println("Geben sie den Namen des Formulars ein: ");
                 eingabe = sc.nextLine();
                 bezeichnungFormular = eingabe;
 
@@ -124,6 +124,7 @@ public class UI implements HandleUserEvent, Subscriber {
             suchParameter[i] = eingabe;
 
         }
+        System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
     }
 
