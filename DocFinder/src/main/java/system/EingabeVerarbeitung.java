@@ -2,10 +2,11 @@ package system;
 
 import daten.DatenVerwaltung;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EingabeVerarbeitung implements ManageInput {
-    private List<daten.Dokument> dokuments;
+    private List<daten.Dokument> dokuments= new ArrayList<>();
     private String dateipfad;
     private String[][] keywords;
     private String[] bezeichnung;
@@ -26,8 +27,13 @@ public class EingabeVerarbeitung implements ManageInput {
 
     }
 
-    public void dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular) {
+
+        public void dokumentHinzufuegenNachUser (String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular){
+        try{
         datenVerwaltung.setDokument(new daten.Dokument(name, datentyp, datum, dateipfad), keywords, bezeichnungFormular, wertFormular);
+    }catch(NullPointerException e){
+            System.out.println("Das Dokument ist leer oder nicht vorhanden.");
+        }
     }
 
     public void erstelleKeywordAbfrage() {
