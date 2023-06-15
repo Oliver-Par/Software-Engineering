@@ -31,6 +31,7 @@ public class EingabeVerarbeitung implements ManageInput {
         public void dokumentHinzufuegenNachUser (String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular){
         try{
         datenVerwaltung.setDokument(new daten.Dokument(name, datentyp, datum, dateipfad), keywords, bezeichnungFormular, wertFormular);
+        datenVerwaltung.saveData();
     }catch(NullPointerException e){
             System.out.println("Das Dokument ist leer oder nicht vorhanden.");
         }
