@@ -41,7 +41,7 @@ public class UI implements HandleUserEvent, Subscriber {
 
         List<daten.Dokument> dokuments = new ArrayList<daten.Dokument>();
         String pfad = "";
-        system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(pfad);
+
 
 
         while (!eingabe.equals("5")) {
@@ -86,7 +86,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 eingabe = sc.nextLine();
                 wertFormular = eingabe;
 
-
+                system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(pfad);
                 verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad, keywords, bezeichnungFormular, wertFormular);
 
                 System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");
