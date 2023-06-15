@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UI implements HandleUserEvent, Subscriber {
-    private String[] suchParameter;
+    private String[] suchParameter = new String[5];
 
     private String[] ausgabe;
 
@@ -58,7 +58,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 eingabe = sc.nextLine();
             }
             if (eingabe.equals("3")) {
-                System.out.println("Geben sie den Namen vom daten.Dokument ein");
+                System.out.println("Geben sie den Namen vom daten.Dokument ein: ");
                 eingabe = sc.nextLine();
                 name = eingabe;
 
@@ -69,20 +69,18 @@ public class UI implements HandleUserEvent, Subscriber {
                 LocalDate localDate = LocalDate.now();
                 datum = localDate.toString();
 
-                System.out.println("Geben sie den Dateipfad ein");
+                System.out.println("Geben sie den Dateipfad ein: ");
                 eingabe = sc.nextLine();
                 dateipfad = eingabe;
 
-                System.out.println("Geben sie Keywords ein");
-                eingabe = sc.nextLine();
-                keyword = eingabe;
+                System.out.println("Geben Sie jetzt die vom System angefragten Suchparameter ein: ");
+                suchparameterEingabe();
 
-
-                System.out.println("Geben sie den BezeichnungFormular ein");
+                System.out.println("Geben sie den Namen des Formulars ein: ");
                 eingabe = sc.nextLine();
                 bezeichnungFormular = eingabe;
 
-                System.out.println("Geben sie das WertFormular ein");
+                System.out.println("Geben sie das WertFormular ein: ");
                 eingabe = sc.nextLine();
                 wertFormular = eingabe;
 
@@ -103,9 +101,34 @@ public class UI implements HandleUserEvent, Subscriber {
     }
 
     public String[] suchparameterEingabe() {
+        Scanner sc = new Scanner(System.in);
+        String eingabe = "";
+
+        for (int i = 0; i<5;i++){
+            if (i==0){
+                System.out.println("Namen des Dokuments: ");
+            }
+            if (i==1){
+                System.out.println("Art des Dokuments: ");
+            }
+            if (i==2){
+                System.out.println("Namen des Arztes: ");
+            }
+            if (i==3){
+                System.out.println("Datum der Untersuchung: ");
+            }
+            if (i==4){
+                System.out.println("Ort der Untersuchung: ");
+            }
+            eingabe = sc.nextLine();
+            suchParameter[i] = eingabe;
+
+        }
+        System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
     }
 
     public void update(String[] ausgabe) {
+
     }
 }

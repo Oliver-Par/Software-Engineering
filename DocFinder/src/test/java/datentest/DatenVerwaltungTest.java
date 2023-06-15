@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class DatenVerwaltungTest {
     private static final List<Dokument> doks = new ArrayList<>();
     private static final List<Formular> form = new ArrayList<>();
