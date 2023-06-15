@@ -103,10 +103,33 @@ public class UI implements HandleUserEvent, Subscriber {
     }
 
     public String[] suchparameterEingabe() {
+        Scanner sc = new Scanner(System.in);
+        String eingabe = sc.nextLine();
+
+        for (int i = 0; i<5;i++){
+            if (i==0){
+                System.out.println("Geben Sie den Namen des Dokuments an: ");
+            }
+            if (i==1){
+                System.out.println("Geben Sie die Art des Dokuments an: ");
+            }
+            if (i==2){
+                System.out.println("Geben Sie den Namen des Arztes: ");
+            }
+            if (i==3){
+                System.out.println("Geben Sie das Datum der Untersuchung an: ");
+            }
+            if (i==4){
+                System.out.println("Geben Sie den Ort: ");
+            }
+            eingabe = sc.nextLine();
+            suchParameter[i] = eingabe;
+
+        }
         return suchParameter;
     }
 
     public void update(String[] ausgabe) {
-        //Hallo
+
     }
 }
