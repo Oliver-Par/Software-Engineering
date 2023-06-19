@@ -2,7 +2,9 @@ package daten;
 
 import daten.Formular;
 
-public class Dokument{
+import java.io.Serializable;
+
+public class Dokument implements Serializable {
     private String name;
     private String datentyp;
     private String datum;

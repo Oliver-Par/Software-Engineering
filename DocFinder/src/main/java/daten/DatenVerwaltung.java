@@ -15,15 +15,20 @@ public class DatenVerwaltung implements SearchData, Serializable {
     private String[] data;
 
     public DatenVerwaltung(List<Dokument> dokuments, String[][] keywords, String[] bezeichnung, String[] wert) {
-        this.documents = dokuments;
-        this.formulars = new ArrayList<>();
-        int n = 0;
-        // Hier muss ich es noch hinbekommen für jedes Dokument das dazugehörige Formular als from zu setzen mit
-        // dokument.setFormular() jedoch muss ich schauen wie ich das programmiert bekomme. Dies ist auch der Grund
-        // fürs fehlschlagen des Tests 2.
-        for(Dokument d: dokuments){
-            this.form = d.setFormular(keywords[n], bezeichnung[n], wert[n]);
-            formulars.add(form);
+        if(dokuments != null) {
+            this.documents = dokuments;
+            this.formulars = new ArrayList<>();
+            int n = 0;
+            // Hier muss ich es noch hinbekommen für jedes Dokument das dazugehörige Formular als from zu setzen mit
+            // dokument.setFormular() jedoch muss ich schauen wie ich das programmiert bekomme. Dies ist auch der Grund
+            // fürs fehlschlagen des Tests 2.
+            for (Dokument d : dokuments) {
+                this.form = d.setFormular(keywords[n], bezeichnung[n], wert[n]);
+                formulars.add(form);
+            }
+        }else{
+            this.documents = new ArrayList<>();
+            this.formulars = new ArrayList<>();
         }
     }
 
@@ -47,12 +52,16 @@ public class DatenVerwaltung implements SearchData, Serializable {
     }
 
     public boolean saveData() {
+        List<Dokument> tempList = this.documents;
+        this.documents = readData();
+        for(Dokument doc : tempList){
+            this.documents.add(doc);
+        }
         try (FileOutputStream fos = new FileOutputStream("save.txt");) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 for (Dokument d : this.documents) {
                     try {
                         oos.writeObject(d);
-                        oos.flush();
                     } catch (IOException ioe) {
                         ioe.printStackTrace();
                         System.out.println("File does not allow to be interacted with.");
@@ -78,24 +87,21 @@ public class DatenVerwaltung implements SearchData, Serializable {
 
     public List<Dokument> readData() {
         List<Dokument> dokList = new ArrayList<>();
-        Dokument compare = new Dokument("test", "test", "test", "test");
-        int notFirst = 0;
+
+        Dokument test;
         try (FileInputStream fis = new FileInputStream("save.txt");) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                do {
-                    if(notFirst != 0){
-                        dokList.add(compare);
+                try{
+                    while ((test = (Dokument) ois.readObject()) != null){
+                        dokList.add(test);
                     }
-                    try {
-                        compare = (Dokument) ois.readObject();
-                    } catch (ClassNotFoundException cnfe) {
-                        cnfe.printStackTrace();
-                        System.out.println("Class of an serialized object cannot be found.");
-                        compare = null;
-                    }
-                    notFirst++;
-                }while (compare != null);
-            } catch (IOException ioe) {
+                } catch (ClassNotFoundException cnfe) {
+                    cnfe.printStackTrace();
+                    System.out.println("Class of an serialized object cannot be found.");
+                }
+            } catch (EOFException eofe){
+                //Der Reader hat das Ende erreicht und wird geschlossen.
+            }catch (IOException ioe) {
                 ioe.printStackTrace();
                 System.out.println("ObjectOutputStream can not be closed.");
             }
@@ -120,4 +126,3 @@ public class DatenVerwaltung implements SearchData, Serializable {
         return result;
     }
 }
-

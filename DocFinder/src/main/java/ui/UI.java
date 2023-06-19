@@ -1,5 +1,7 @@
 package ui;
 
+import daten.Dokument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -17,6 +19,8 @@ public class UI implements HandleUserEvent, Subscriber {
     private String keyword;
     private String bezeichnungFormular;
     private String wertFormular;
+
+    system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung();
 
     public UI() {
 
@@ -47,8 +51,11 @@ public class UI implements HandleUserEvent, Subscriber {
         while (!eingabe.equals("5")) {
             if (eingabe.equals("1")) {
 
-                System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");
-                eingabe = sc.nextLine();
+                System.out.println("Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
+                List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabe());
+                for(Dokument d : treffer){
+                    System.out.println(d);
+                }
             }
             if (eingabe.equals("2")) {
                 System.out.println("Bitte suchbegriff angeben");
@@ -74,7 +81,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 dateipfad = eingabe;
 
                 System.out.println("Geben Sie jetzt die vom System angefragten Suchparameter ein: ");
-                suchparameterEingabe();
+                keywords = suchparameterEingabe();
 
                 System.out.println("Geben sie den Namen des Formulars ein: ");
                 eingabe = sc.nextLine();
@@ -84,7 +91,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 eingabe = sc.nextLine();
                 wertFormular = eingabe;
 
-                system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung(pfad);
+
                 verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad, keywords, bezeichnungFormular, wertFormular);
 
                 System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");

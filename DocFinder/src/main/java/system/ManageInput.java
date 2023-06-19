@@ -1,5 +1,9 @@
 package system;
 
+import daten.Dokument;
+
+import java.util.List;
+
 public interface ManageInput {
     daten.Dokument[] sucheDokument(String[] suchParameter);
 
@@ -11,7 +15,7 @@ public interface ManageInput {
 
     boolean bestaetigung();
 
-    String suchergebnisAnzeigen(daten.Dokument[] zutreffendeDokuments);
+    List<Dokument> suchergebnisAnzeigen(String[] zutreffendeKeywords);
 
     void dateiOeffnen(daten.Dokument dokument);
 
