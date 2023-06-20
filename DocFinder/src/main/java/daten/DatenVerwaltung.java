@@ -120,9 +120,6 @@ public class DatenVerwaltung implements SearchData, Serializable {
         for (Dokument d : documents){
             result = 31 * result + (d != null ? d.hashCode() : 0);
         }
-        for (Formular f: formulars){
-            result = 31 * result + (f != null ? f.hashCode() : 0);
-        }
         return result;
     }
 }
