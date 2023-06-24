@@ -11,7 +11,6 @@ public interface ManageInput {
 
     boolean dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular);
 
-    void erstelleKeywordAbfrage();
 
     boolean bestaetigung();
 
