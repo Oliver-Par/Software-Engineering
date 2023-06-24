@@ -7,28 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatenVerwaltung implements SearchData, Serializable {
+    private final List<Formular> formulars;
     private List<Dokument> documents;
-    private List<Formular> formulars;
     private Dokument dok;
     private Formular form;
     private Subscriber[] subscribers;
     private String[] data;
 
     public DatenVerwaltung(List<Dokument> dokuments, String[][] keywords, String[] bezeichnung, String[] wert) {
-        if(dokuments != null) {
-            this.documents = dokuments;
-            this.formulars = new ArrayList<>();
-            int n = 0;
-            // Hier muss ich es noch hinbekommen für jedes Dokument das dazugehörige Formular als from zu setzen mit
-            // dokument.setFormular() jedoch muss ich schauen wie ich das programmiert bekomme. Dies ist auch der Grund
-            // fürs fehlschlagen des Tests 2.
+        if (dokuments != null) {
+            documents = dokuments;
+            formulars = new ArrayList<>();
+            int n = -1;
             for (Dokument d : dokuments) {
-                this.form = d.setFormular(keywords[n], bezeichnung[n], wert[n]);
+                n++;
+                form = d.setFormular(keywords[n], bezeichnung[n], wert[n]);
                 formulars.add(form);
             }
-        }else{
-            this.documents = new ArrayList<>();
-            this.formulars = new ArrayList<>();
+            n = -1;
+        } else {
+            documents = new ArrayList<>();
+            formulars = new ArrayList<>();
         }
     }
 
@@ -37,8 +36,13 @@ public class DatenVerwaltung implements SearchData, Serializable {
     }
 
     public void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert) {
-        this.form = dokument.setFormular(keywords, bezeichnung, wert);
-        this.dok = dokument;
+        try {
+            form = dokument.setFormular(keywords, bezeichnung, wert);
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            throw new NullPointerException("Dokument, das versucht wird zu setzen ist null.");
+        }
+        dok = dokument;
         addDokument(dok);
         addFormular(form);
     }
@@ -47,19 +51,19 @@ public class DatenVerwaltung implements SearchData, Serializable {
         documents.add(dokument);
     }
 
-    private void addFormular(Formular formular){
+    private void addFormular(Formular formular) {
         formulars.add(formular);
     }
 
     public boolean saveData() {
-        List<Dokument> tempList = this.documents;
-        this.documents = readData();
-        for(Dokument doc : tempList){
-            this.documents.add(doc);
+        List<Dokument> tempList = documents;
+        documents = readData();
+        for (Dokument doc : tempList) {
+            documents.add(doc);
         }
-        try (FileOutputStream fos = new FileOutputStream("save.txt");) {
+        try (FileOutputStream fos = new FileOutputStream("save.txt")) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                for (Dokument d : this.documents) {
+                for (Dokument d : documents) {
                     try {
                         oos.writeObject(d);
                     } catch (IOException ioe) {
@@ -89,26 +93,26 @@ public class DatenVerwaltung implements SearchData, Serializable {
         List<Dokument> dokList = new ArrayList<>();
 
         Dokument test;
-        try (FileInputStream fis = new FileInputStream("save.txt");) {
+        try (FileInputStream fis = new FileInputStream("save.txt")) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                try{
-                    while ((test = (Dokument) ois.readObject()) != null){
+                try {
+                    while ((test = (Dokument) ois.readObject()) != null) {
                         dokList.add(test);
                     }
                 } catch (ClassNotFoundException cnfe) {
                     cnfe.printStackTrace();
                     System.out.println("Class of an serialized object cannot be found.");
                 }
-            } catch (EOFException eofe){
+            } catch (EOFException eofe) {
                 //Der Reader hat das Ende erreicht und wird geschlossen.
-            }catch (IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
                 System.out.println("ObjectOutputStream can not be closed.");
             }
         } /*catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
             System.out.println("A File was not found, new Filepath needs to be given.");
-        } */catch (IOException ioe) {
+        } */ catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println("FileOutputStream can not be closed.");
         }
@@ -117,7 +121,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
 
     public int hashCode() {
         int result = 1;
-        for (Dokument d : documents){
+        for (Dokument d : documents) {
             result = 31 * result + (d != null ? d.hashCode() : 0);
         }
         return result;
