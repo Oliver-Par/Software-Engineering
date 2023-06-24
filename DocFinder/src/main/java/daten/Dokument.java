@@ -16,6 +16,21 @@ public class Dokument implements Serializable {
         this.datum = datum;
         this.dateipfad = dateipfad;
     }
+    public String getName() {
+        return name;
+    }
+
+    public String getDatentyp() {
+        return datentyp;
+    }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public String getDateipfad() {
+        return dateipfad;
+    }
 
     public Formular getFormular() {
         return formular;
