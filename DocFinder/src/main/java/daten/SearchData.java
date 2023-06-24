@@ -5,12 +5,11 @@ import java.util.List;
 public interface SearchData {
     List<Dokument> getDokument();
 
-    void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert);
-
     boolean saveData();
 
-    List<Dokument> readData();
+    void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert); //Nur Interface
 
+    List<Dokument> readData();
 
 
 }

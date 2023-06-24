@@ -1,6 +1,8 @@
 package daten;
 
-public class Formular {
+import java.io.Serializable;
+
+public class Formular implements Serializable {
     private String[] keyword;
 
     private String bezeichnung;

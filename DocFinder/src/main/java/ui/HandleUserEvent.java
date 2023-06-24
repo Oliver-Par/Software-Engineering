@@ -5,5 +5,5 @@ public interface HandleUserEvent {
 
     void menueErstellen();
 
-    String[] suchparameterEingabe();
+    String[] suchparameterEingabe(String name);
 }
