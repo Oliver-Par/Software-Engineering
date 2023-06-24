@@ -9,7 +9,7 @@ public interface ManageInput {
 
     void erstellePfadabfrage(String auswahl);
 
-    void dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular);
+    boolean dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular);
 
     void erstelleKeywordAbfrage();
 

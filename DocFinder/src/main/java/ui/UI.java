@@ -4,13 +4,14 @@ import daten.Dokument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class UI implements HandleUserEvent, Subscriber {
-    private String[] suchParameter = new String[5];
-
+    private final String[] suchParameter = new String[5];
+    system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung();
     private String[] ausgabe;
-
     private String name;
     private String datentyp;
     private String datum;
@@ -19,8 +20,6 @@ public class UI implements HandleUserEvent, Subscriber {
     private String keyword;
     private String bezeichnungFormular;
     private String wertFormular;
-
-    system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung();
 
     public UI() {
 
@@ -47,13 +46,12 @@ public class UI implements HandleUserEvent, Subscriber {
         String pfad = "";
 
 
-
         while (!eingabe.equals("5")) {
             if (eingabe.equals("1")) {
 
                 System.out.println("Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
-                List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabe());
-                for(Dokument d : treffer){
+                List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabe(name));
+                for (Dokument d : treffer) {
                     System.out.println(d);
                 }
             }
@@ -81,7 +79,7 @@ public class UI implements HandleUserEvent, Subscriber {
                 dateipfad = eingabe;
 
                 System.out.println("Geben Sie jetzt die vom System angefragten Suchparameter ein: ");
-                keywords = suchparameterEingabe();
+                keywords = suchparameterEingabe(name);
 
                 System.out.println("Geben sie den Namen des Formulars ein: ");
                 eingabe = sc.nextLine();
@@ -92,8 +90,10 @@ public class UI implements HandleUserEvent, Subscriber {
                 wertFormular = eingabe;
 
 
-                verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad, keywords, bezeichnungFormular, wertFormular);
-
+                boolean erfolg = verarbeitung.dokumentHinzufuegenNachUser(name, datentyp, datum, dateipfad, keywords, bezeichnungFormular, wertFormular);
+                if (erfolg) {
+                    System.out.println("Das Anlegen war erfolgreich!");
+                }
                 System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");
                 eingabe = sc.nextLine();
             } else {
@@ -107,28 +107,31 @@ public class UI implements HandleUserEvent, Subscriber {
         return null;
     }
 
-    public String[] suchparameterEingabe() {
+    public String[] suchparameterEingabe(String name) {
         Scanner sc = new Scanner(System.in);
         String eingabe = "";
 
-        for (int i = 0; i<5;i++){
-            if (i==0){
+        for (int i = 0; i < 5; i++) {
+            if (i == 0) {
                 System.out.println("Namen des Dokuments: ");
+                suchParameter[i] = name;
             }
-            if (i==1){
+            if (i == 1) {
                 System.out.println("Art des Dokuments: ");
             }
-            if (i==2){
+            if (i == 2) {
                 System.out.println("Namen des Arztes: ");
             }
-            if (i==3){
+            if (i == 3) {
                 System.out.println("Datum der Untersuchung: ");
             }
-            if (i==4){
+            if (i == 4) {
                 System.out.println("Ort der Untersuchung: ");
             }
-            eingabe = sc.nextLine();
-            suchParameter[i] = eingabe;
+            if (i != 0) {
+                eingabe = sc.nextLine();
+                suchParameter[i] = eingabe;
+            }
 
         }
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
