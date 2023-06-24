@@ -32,10 +32,6 @@ public class EingabeVerarbeitung implements ManageInput {
         return datenVerwaltung.saveData();
     }
 
-    public void erstelleKeywordAbfrage() {
-
-    }
-
     public boolean bestaetigung() {
         return false;
     }
