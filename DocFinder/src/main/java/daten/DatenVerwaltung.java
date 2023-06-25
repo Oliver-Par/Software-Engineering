@@ -50,7 +50,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
     }
 
     /**
-     * Setzt das Formular für das angegebene Dokument mit den übergebenen Keywords, Bezeichnung und Wert.
+     * Setzt das Formular für das angegebene Dokument mit den übergebenen Keywords, Bezeichnung und Wert gleich.
      * Fügt das Dokument und das Formular hinzu.
      *
      * @param dokument   Das Dokument, für das das Formular gesetzt werden soll.
