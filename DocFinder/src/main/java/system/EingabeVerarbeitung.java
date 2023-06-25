@@ -26,16 +26,42 @@ public class EingabeVerarbeitung implements ManageInput {
 
     }
 
+    /**
+     * Die Methode bekommt die aufgelisteten Parameter übergeben.
+     * Dann wird die Liste an Dokumenten mit datenVerwaltung.readData() ausgegeben.
+     * Mit der Methode "setDokument" wird ein Dokument erstellt damit es zum Schluss mit der Methode
+     * datenverwaltung.savedata() gespeichert werden kann.
+     * @param name
+     * @param datentyp
+     * @param datum
+     * @param dateipfad
+     * @param keywords
+     * @param bezeichnungFormular
+     * @param wertFormular
+     * @return
+     */
     public boolean dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular) {
         datenVerwaltung.readData();
         datenVerwaltung.setDokument(new daten.Dokument(name, datentyp, datum, dateipfad), keywords, bezeichnungFormular, wertFormular);
         return datenVerwaltung.saveData();
     }
 
+    /**
+     * Die Methode bestaetigung gibt false aus.
+     * @return false
+     */
     public boolean bestaetigung() {
         return false;
     }
 
+    /**
+     * Es werden der Methode zutreffendeKeywords übergeben.
+     * Für jedes Dokument werden die Formular und dann deren FormularKeywords gespeichert.
+     * Die Keywords werden auf übereinstimmung verglichen und wenn es einen treffer gibt wird
+     * der Liste aus Dokumenten das document hinzugefügt.
+     * @param zutreffendeKeywords
+     * @return die auf die Keywords zutreffenden Dokumente
+     */
     public List<Dokument> suchergebnisAnzeigen(String[] zutreffendeKeywords) {
         List<Dokument> dokuments1 = datenVerwaltung.readData();
         boolean treffer = false;
