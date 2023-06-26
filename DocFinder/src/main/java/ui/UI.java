@@ -189,6 +189,8 @@ public class UI implements HandleUserEvent, Subscriber {
             if (i == 4) {
                 System.out.println("Ort der Untersuchung: ");
             }
+            eingabe = sc.nextLine();
+            suchParameter[i] = eingabe;
         }
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
