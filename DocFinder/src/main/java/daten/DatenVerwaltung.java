@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DatenVerwaltung implements SearchData, Serializable {
     private final List<Formular> formulars;
     private List<Dokument> documents;
@@ -14,6 +15,15 @@ public class DatenVerwaltung implements SearchData, Serializable {
     private Subscriber[] subscribers;
     private String[] data;
 
+    /**
+     * Konstruktor der DatenVerwaltung-Klasse.
+     * Erzeugt eine neue Datenverwaltung mit den übergebenen Dokumenten, Keywords, Bezeichnungen und Werten, welche als Formular zusammengefasst werden.
+     *
+     * @param dokuments   Die Liste der Dokumente.
+     * @param keywords    Ein Array der Keywords für jedes Dokument vorgibt.
+     * @param bezeichnung Ein Array der Bezeichnungen für die Formulare vorgibt.
+     * @param wert        Ein Array der Werte für die Formulare vorgibt.
+     */
     public DatenVerwaltung(List<Dokument> dokuments, String[][] keywords, String[] bezeichnung, String[] wert) {
         if (dokuments != null) {
             documents = dokuments;
@@ -30,11 +40,24 @@ public class DatenVerwaltung implements SearchData, Serializable {
             formulars = new ArrayList<>();
         }
     }
-
+    /**
+     * Gibt die Liste der Dokumente zurück.
+     *
+     * @return Die Liste der Dokumente.
+     */
     public List<Dokument> getDokument() {
         return documents;
     }
 
+    /**
+     * Setzt das Formular für das angegebene Dokument mit den übergebenen Keywords, Bezeichnung und Wert gleich.
+     * Fügt das Dokument und das Formular hinzu.
+     *
+     * @param dokument   Das Dokument, für das das Formular gesetzt werden soll.
+     * @param keywords   Die Keywords für das Formular.
+     * @param bezeichnung Die Bezeichnung des Formulars.
+     * @param wert       Der Wert des Formulars.
+     */
     public void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert) {
         try {
             form = dokument.setFormular(keywords, bezeichnung, wert);
@@ -47,14 +70,29 @@ public class DatenVerwaltung implements SearchData, Serializable {
         addFormular(form);
     }
 
+    /**
+     * Fügt das Dokument der Fomularliste hinzu.
+     *
+     * @param dokument Das Dokument, welches hinzugefügt werden soll.
+     */
     private void addDokument(Dokument dokument) {
         documents.add(dokument);
     }
 
+    /**
+     * Fügt das Formular der Fomularliste hinzu.
+     *
+     * @param formular Das Formular, welches hinzugefügt werden soll.
+     */
     private void addFormular(Formular formular) {
         formulars.add(formular);
     }
 
+    /**
+     * Speichert die Daten der Datenverwaltung in einer serialisierten Datei.
+     *
+     * @return true wenn das Speichern erfolgreich war, sonst false.
+     */
     public boolean saveData() {
         List<Dokument> tempList = documents;
         documents = readData();
@@ -89,6 +127,11 @@ public class DatenVerwaltung implements SearchData, Serializable {
         return true;
     }
 
+    /**
+     * Liest die Daten der Dokumente und Fomulare aus einer Datei.
+     *
+     * @return Liste der gelesenen Dokumente.
+     */
     public List<Dokument> readData() {
         List<Dokument> dokList = new ArrayList<>();
 
