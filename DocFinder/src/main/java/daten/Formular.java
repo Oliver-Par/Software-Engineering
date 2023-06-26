@@ -12,9 +12,9 @@ public class Formular implements Serializable {
     /**
      * Der Konstruktor vom Formular erzeugt ein neues Formular mit den übergebenen Parametern
      * keywords, bezeichnung und wert.
-     * @param keyword
-     * @param bezeichnung
-     * @param wert
+     * @param keyword die Keywords des Formulares.
+     * @param bezeichnung die Bezeichnung des Formulares.
+     * @param wert der Wert des Formulares
      */
     public Formular(String[] keyword, String bezeichnung, String wert){
         this.keyword = keyword;
@@ -24,21 +24,21 @@ public class Formular implements Serializable {
 
     /**
      * Die Methode gibt das Array von keywords von dem Formular, auf dem die Methode aufgerufen wird, zurürck.
-     * @return keywords
+     * @return Die keywords des Fomulares
      */
     public String[] getKeyword(){
         return this.keyword;
     }
     /**
      * Die Methode gibt die bezeichnung von dem Formular, auf dem die Methode aufgerufen wird, zurürck.
-     * @return bezeichnung
+     * @return die Bezeichnung des Formulares.
      */
     public String getBezeichnung(){
         return this.bezeichnung;
     }
     /**
      * Die Methode gibt den wert von dem Formular, auf dem die Methode aufgerufen wird, zurürck.
-     * @return wert
+     * @return Der Wert des Formulares.
      */
 
     public String getWert(){

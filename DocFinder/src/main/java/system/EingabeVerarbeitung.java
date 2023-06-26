@@ -31,14 +31,14 @@ public class EingabeVerarbeitung implements ManageInput {
      * Dann wird die Liste an Dokumenten mit datenVerwaltung.readData() ausgegeben.
      * Mit der Methode "setDokument" wird ein Dokument erstellt damit es zum Schluss mit der Methode
      * datenverwaltung.savedata() gespeichert werden kann.
-     * @param name
-     * @param datentyp
-     * @param datum
-     * @param dateipfad
-     * @param keywords
-     * @param bezeichnungFormular
-     * @param wertFormular
-     * @return
+     * @param name Der Name des Dokumentes.
+     * @param datentyp Der Datentyp des Dokumentes.
+     * @param datum Das Datum des Dokumentes.
+     * @param dateipfad Der Dateipfad des Dokumentes.
+     * @param keywords  Die Keywords des Dokumentes.
+     * @param bezeichnungFormular Die Bezeichnung des Formulares.
+     * @param wertFormular Der Wert des Formulares.
+     * @return true wenn das Speichern erfolgreich war, sonst false.
      */
     public boolean dokumentHinzufuegenNachUser(String name, String datentyp, String datum, String dateipfad, String[] keywords, String bezeichnungFormular, String wertFormular) {
         datenVerwaltung.readData();
