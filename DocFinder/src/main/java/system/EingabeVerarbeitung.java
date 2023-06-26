@@ -71,7 +71,7 @@ public class EingabeVerarbeitung implements ManageInput {
             String[] formularKeywords = formular.getKeyword();
             for (int n = 0; n < 5; n++) {
                 if (!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null) {
-                    if (zutreffendeKeywords[n].equals(formularKeywords[n])) {
+                    if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
                         treffer = true;
                     } else {
                         treffer = false;
