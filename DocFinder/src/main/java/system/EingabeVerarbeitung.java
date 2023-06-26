@@ -13,7 +13,7 @@ public class EingabeVerarbeitung implements ManageInput {
     private String[][] keywords;
     private String[] bezeichnung;
     private String[] wert;
-    DatenVerwaltung datenVerwaltung = new DatenVerwaltung(dokuments,keywords,bezeichnung,wert);
+    DatenVerwaltung datenVerwaltung = new DatenVerwaltung(dokuments, keywords, bezeichnung, wert);
 
 
     public daten.Dokument[] sucheDokument(String[] suchParameter) {
@@ -44,20 +44,20 @@ public class EingabeVerarbeitung implements ManageInput {
         List<Dokument> dokuments1 = datenVerwaltung.readData();
         boolean treffer = false;
         List<Dokument> zutreffendeDocuments = new ArrayList<>();
-        for(Dokument document : dokuments1){
+        for (Dokument document : dokuments1) {
             Formular formular = document.getFormular();
             String[] formularKeywords = formular.getKeyword();
-            for(int n = 0; n < 5; n++){
-                if(!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null){
-                    if(zutreffendeKeywords[n].equals(formularKeywords[n])){
+            for (int n = 0; n < 5; n++) {
+                if (!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null) {
+                    if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
                         treffer = true;
-                    }else{
+                    } else {
                         treffer = false;
                         break;
                     }
                 }
             }
-            if(treffer){
+            if (treffer) {
                 zutreffendeDocuments.add(document);
             }
         }
@@ -67,6 +67,7 @@ public class EingabeVerarbeitung implements ManageInput {
     public void dateiOeffnen(daten.Dokument dokument) {
 
     }
+
     public void dateiLoeschen(daten.Dokument dokument) {
 
     }
