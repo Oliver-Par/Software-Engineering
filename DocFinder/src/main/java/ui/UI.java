@@ -141,7 +141,6 @@ public class UI implements HandleUserEvent, Subscriber {
 
         for (int i = 0; i < 5; i++) {
             if (i == 0) {
-                System.out.println("Namen des Dokuments: ");
                 suchParameter[i] = name;
             }
             if (i == 1) {
@@ -177,7 +176,6 @@ public class UI implements HandleUserEvent, Subscriber {
         for (int i = 0; i < 5; i++) {
             if (i == 0) {
                 System.out.println("Namen des Dokuments: ");
-                suchParameter[i] = name;
             }
             if (i == 1) {
                 System.out.println("Art des Dokuments: ");
@@ -191,11 +189,6 @@ public class UI implements HandleUserEvent, Subscriber {
             if (i == 4) {
                 System.out.println("Ort der Untersuchung: ");
             }
-            if (i != 0) {
-                eingabe = sc.nextLine();
-                suchParameter[i] = eingabe;
-            }
-
         }
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
