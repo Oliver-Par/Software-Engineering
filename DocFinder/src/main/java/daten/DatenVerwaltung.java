@@ -126,6 +126,52 @@ public class DatenVerwaltung implements SearchData, Serializable {
         }
         return true;
     }
+    public boolean deleteData() {
+        List<Dokument> tempList = this.documents;
+        this.documents = this.readData();
+        for (Dokument doc : tempList) {
+            documents.remove(doc);
+        }
+
+
+        try {
+            FileOutputStream fos = new FileOutputStream("save.txt");
+
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                for (Dokument d : this.documents) {
+                    try {
+                        oos.writeObject(d);
+                    } catch (IOException var10) {
+                        var10.printStackTrace();
+                        System.out.println("File does not allow to be interacted with.");
+                        return false;
+                    }
+                }
+
+                oos.close();
+            } catch (IOException var11) {
+                var11.printStackTrace();
+                System.out.println("File does not allow to be interacted with. Or ObjectOutputStream may not be able to be closed.");
+                return false;
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException var12) {
+                    var12.printStackTrace();
+                    System.out.println("FileOutputStream can not be closed.");
+                }
+            }
+
+            return true;
+        } catch (FileNotFoundException var13) {
+            var13.printStackTrace();
+            System.out.println("A File was not found, new Filepath needs to be given.");
+            return false;
+        }
+    }
+
 
     /**
      * Liest die Daten der Dokumente und Fomulare aus einer Datei.
