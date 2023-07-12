@@ -113,7 +113,19 @@ public class UI implements HandleUserEvent, Subscriber {
                         "Wählen sie die 5 um das Programm zu beenden!"
                 );
                 eingabe = sc.nextLine();
-            } else {
+            }  if (eingabe.equals("4")) {
+
+                System.out.println("Erst wird das Dokument gseuscht, welches gelöscht werden soll .Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
+                List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabeOhneName());
+                for (Dokument d : treffer) {
+                    System.out.println(d);
+                }
+                System.out.println("Geben sie die Nummer an, die gelöscht werden soll.");
+                eingabe = sc.nextLine();
+                verarbeitung.dateiLoeschen(treffer.get(löschIndex(eingabe)));
+
+            }
+            else {
                 System.out.println("Bitte überprüfen sie die Eingabe");
 
                 System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
@@ -194,6 +206,17 @@ public class UI implements HandleUserEvent, Subscriber {
         }
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
+    }
+    public int löschIndex(String index){
+     // try {
+          int ausgabe;
+          ausgabe = (Integer.parseInt(index) - 1);
+
+
+    /*  } catch (NumberFormatException NFE){
+          System.out.println("Bitte richtige Zahl eingeben.");
+      } */
+        return ausgabe;
     }
 
     public void update(String[] ausgabe) {
