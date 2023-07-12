@@ -18,5 +18,5 @@ public interface ManageInput {
 
     void dateiOeffnen(daten.Dokument dokument);
 
-    void dateiLoeschen(daten.Dokument dokument);
+    boolean dateiLoeschen(daten.Dokument dokument);
 }
