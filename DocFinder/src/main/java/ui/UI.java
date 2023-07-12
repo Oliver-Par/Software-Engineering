@@ -208,14 +208,13 @@ public class UI implements HandleUserEvent, Subscriber {
         return suchParameter;
     }
     public int löschIndex(String index){
-     // try {
-          int ausgabe;
+        int ausgabe=-1;
+      try {
           ausgabe = (Integer.parseInt(index) - 1);
 
-
-    /*  } catch (NumberFormatException NFE){
+      } catch (NumberFormatException NFE){
           System.out.println("Bitte richtige Zahl eingeben.");
-      } */
+      }
         return ausgabe;
     }
 
