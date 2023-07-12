@@ -70,6 +70,17 @@ public class DatenVerwaltung implements SearchData, Serializable {
         addFormular(form);
     }
 
+    public void deleteDokument(Dokument dokument){
+        for (int i = 0; i < documents.size() ; i++) {
+
+
+            if (documents.get(i) ==dokument) {
+                documents.remove(i);
+            }
+        }
+
+    }
+
     /**
      * Fügt das Dokument der Fomularliste hinzu.
      *
@@ -99,7 +110,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         for (Dokument doc : tempList) {
             documents.add(doc);
         }
-        try (FileOutputStream fos = new FileOutputStream("save.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Luca\\Documents\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 for (Dokument d : documents) {
                     try {
@@ -126,7 +137,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         }
         return true;
     }
-    public boolean deleteData() {
+ /*   public boolean deleteData() {
         List<Dokument> tempList = this.documents;
         this.documents = this.readData();
         for (Dokument doc : tempList) {
@@ -170,7 +181,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
             System.out.println("A File was not found, new Filepath needs to be given.");
             return false;
         }
-    }
+    } */
 
 
     /**
@@ -182,7 +193,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         List<Dokument> dokList = new ArrayList<>();
 
         Dokument test;
-        try (FileInputStream fis = new FileInputStream("save.txt")) {
+        try (FileInputStream fis = new FileInputStream("C:\\Users\\Luca\\Documents\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
                 try {
                     while ((test = (Dokument) ois.readObject()) != null) {

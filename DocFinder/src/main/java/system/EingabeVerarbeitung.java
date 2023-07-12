@@ -69,6 +69,7 @@ public class EingabeVerarbeitung implements ManageInput {
         for (Dokument document : dokuments1) {
             Formular formular = document.getFormular();
             String[] formularKeywords = formular.getKeyword();
+        try {
             for (int n = 0; n < 5; n++) {
                 if (!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null) {
                     if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
@@ -79,9 +80,13 @@ public class EingabeVerarbeitung implements ManageInput {
                     }
                 }
             }
+
             if (treffer) {
                 zutreffendeDocuments.add(document);
             }
+        } catch (NullPointerException NPE){
+            System.out.println("Es konnte kein Suchergebnis gefunden werden");
+        }
         }
         return zutreffendeDocuments;
     }
@@ -90,7 +95,10 @@ public class EingabeVerarbeitung implements ManageInput {
 
     }
 
-    public void dateiLoeschen(daten.Dokument dokument) {
+    public boolean dateiLoeschen(Dokument dokument) {
+        datenVerwaltung.readData();
+        datenVerwaltung.deleteDokument(dokument);
+        return datenVerwaltung.saveData();
 
     }
 }
