@@ -68,8 +68,10 @@ public class UI implements HandleUserEvent, Subscriber {
                 }
             }
             if (eingabe.equals("2")) {
-                System.out.println("Bitte suchbegriff angeben");
+                System.out.println("Bitte den Namen vom Dokument angeben, welches geöffnet werden: ");
                 eingabe = sc.nextLine();
+                verarbeitung.dateiOeffnen(eingabe);
+
 
                 System.out.println("Geben sie hier ein ob sie eine Adresse laden wollen, eine Speizielle suchen, eine neue Speichern möchte oder ob sie das Programm beenden wollen");
                 eingabe = sc.nextLine();

@@ -4,6 +4,9 @@ import daten.DatenVerwaltung;
 import daten.Dokument;
 import daten.Formular;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,8 +89,37 @@ public class EingabeVerarbeitung implements ManageInput {
         return zutreffendeDocuments;
     }
 
-    public void dateiOeffnen(daten.Dokument dokument) {
+    /**
+     * @author Arber Krasniqi
+     * Die Methode bekommt einen Dokumentennamen übergeben. Die Methode prüft ob es ein Dokument mit
+     * dem Namen gespeichert vorliegt. Wenn das Dokument existiert wird es geöffnet.
+     * @param dokumentenName
+     */
 
+    public void dateiOeffnen(String dokumentenName){
+        List<Dokument> dokList = datenVerwaltung.readData();
+        Dokument zutreffendesDokument;
+        String path = "";
+        for (int i = 0; i<dokList.size(); i++){
+            if(dokList.get(i).getName().equals(dokumentenName)){
+                zutreffendesDokument = dokList.get(i);
+                path = zutreffendesDokument.getDateipfad();
+            }
+            i++;
+        }
+
+        File file = new File(path);
+        Desktop desktop = Desktop.getDesktop();
+
+        if (desktop.isSupported(Desktop.Action.OPEN) && file.exists()) {
+            try {
+                desktop.open(file);
+            } catch (IOException e) {
+                System.out.println("Fehler beim Öffnen der Datei: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Datei kann nicht geöffnet werden.");
+        }
     }
 
     public void dateiLoeschen(daten.Dokument dokument) {
