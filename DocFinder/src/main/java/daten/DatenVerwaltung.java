@@ -3,6 +3,8 @@ package daten;
 import ui.Subscriber;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +112,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         for (Dokument doc : tempList) {
             documents.add(doc);
         }
-        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Luca\\Documents\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
+        try (FileOutputStream fos = new FileOutputStream(getDBFilePath())) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 for (Dokument d : documents) {
                     try {
@@ -136,6 +138,28 @@ public class DatenVerwaltung implements SearchData, Serializable {
             return false;
         }
         return true;
+    }
+
+    public static void initDB() {
+        try {
+            Files.createDirectories(Paths.get(getDBPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Files.createFile(Paths.get(getDBFilePath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getDBPath() throws IOException {
+        return new File(".").getCanonicalPath() + "\\data";
+    }
+
+    public static String getDBFilePath() throws IOException {
+        return getDBPath() + "\\" + "save.txt";
     }
  /*   public boolean deleteData() {
         List<Dokument> tempList = this.documents;
@@ -193,7 +217,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         List<Dokument> dokList = new ArrayList<>();
 
         Dokument test;
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\Luca\\Documents\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
+        try (FileInputStream fis = new FileInputStream(getDBFilePath())) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
                 try {
                     while ((test = (Dokument) ois.readObject()) != null) {
