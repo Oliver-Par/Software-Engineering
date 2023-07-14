@@ -16,7 +16,7 @@ public interface ManageInput {
 
     List<Dokument> suchergebnisAnzeigen(String[] zutreffendeKeywords);
 
-    void dateiOeffnen(daten.Dokument dokument);
+    void dateiOeffnen(String dokumentenName);
 
     void dateiLoeschen(daten.Dokument dokument);
 }
