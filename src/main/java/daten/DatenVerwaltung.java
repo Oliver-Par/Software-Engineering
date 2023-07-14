@@ -52,7 +52,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
     }
 
     public boolean saveData() {
-        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\olipa\\OneDrive\\Dokumente\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("src/main/save.txt")) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 for (Dokument d : documents) {
                     try {
@@ -84,7 +84,7 @@ public class DatenVerwaltung implements SearchData, Serializable {
         List<Dokument> dokList = new ArrayList<>();
 
         Dokument test;
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\olipa\\OneDrive\\Dokumente\\GitHub\\Software-Engineering\\DocFinder\\src\\main\\save.txt")) {
+        try (FileInputStream fis = new FileInputStream("src/main/save.txt")) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
                 try {
                     while ((test = (Dokument) ois.readObject()) != null) {
