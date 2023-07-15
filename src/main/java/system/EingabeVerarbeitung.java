@@ -127,7 +127,12 @@ public class EingabeVerarbeitung implements ManageInput {
             System.out.println("Datei kann nicht geöffnet werden.");
         }
     }
-
+    /**
+     * Löscht das angegebene Dokument aus der Datei und speichert diese.
+     *
+     * @param dokument Das zu löschende Dokument.
+     * @return true, wenn das Dokument erfolgreich gelöscht und die Daten gespeichert wurden, ansonsten false.
+     */
     public boolean dateiLoeschen(Dokument dokument) {
         datenVerwaltung.readData();
         datenVerwaltung.deleteDokument(dokument);

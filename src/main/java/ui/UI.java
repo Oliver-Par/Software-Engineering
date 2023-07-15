@@ -209,6 +209,12 @@ public class UI implements HandleUserEvent, Subscriber {
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
     }
+    /**
+     * Konvertiert die angegebene Eingabe in einen Integer-Wert und subtrahiert 1, um den Index zu ermitteln.
+     *
+     * @param index Die zu konvertierende Eingabe.
+     * @return Der Index als Integer-Wert, oder -1, wenn der Index ungültig ist.
+     */
     public int löschIndex(String index){
         int ausgabe=-1;
       try {

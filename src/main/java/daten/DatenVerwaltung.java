@@ -67,10 +67,13 @@ public class DatenVerwaltung implements SearchData, Serializable {
         addFormular(form);
     }
 
+    /**
+     * Löscht das angegebene Dokument aus der Liste der Dokumente.
+     *
+     * @param dokument Das zu löschende Dokument
+     */
     public void deleteDokument(Dokument dokument){
         for (int i = 0; i < documents.size() ; i++) {
-
-
             if (documents.get(i) ==dokument) {
                 documents.remove(i);
             }
