@@ -91,13 +91,15 @@ public class EingabeVerarbeitung implements ManageInput {
     }
 
     /**
+     * @param dokumentenName
+     * @return
      * @author Arber Krasniqi
      * Die Methode bekommt einen Dokumentennamen übergeben. Die Methode prüft ob es ein Dokument mit
      * dem Namen gespeichert vorliegt. Wenn das Dokument existiert wird es geöffnet.
-     * @param dokumentenName
      */
 
-    public void dateiOeffnen(String dokumentenName){
+    public boolean dateiOeffnen(String dokumentenName){
+        boolean done = false;
         List<Dokument> dokList = datenVerwaltung.readData();
         Dokument zutreffendesDokument;
         String path = "";
@@ -115,12 +117,14 @@ public class EingabeVerarbeitung implements ManageInput {
         if (desktop.isSupported(Desktop.Action.OPEN) && file.exists()) {
             try {
                 desktop.open(file);
+                done = true;
             } catch (IOException e) {
                 System.out.println("Fehler beim Öffnen der Datei: " + e.getMessage());
             }
         } else {
             System.out.println("Datei kann nicht geöffnet werden.");
         }
+        return done;
     }
 
     public void dateiLoeschen(daten.Dokument dokument) {
