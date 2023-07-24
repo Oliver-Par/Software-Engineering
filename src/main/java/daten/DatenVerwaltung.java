@@ -42,6 +42,12 @@ public class DatenVerwaltung implements SearchData, Serializable {
             formulars = new ArrayList<>();
         }
     }
+
+    public DatenVerwaltung() {
+        documents = new ArrayList<>();
+        formulars = new ArrayList<>();
+    }
+
     /**
      * Gibt die Liste der Dokumente zurück.
      *
@@ -70,11 +76,12 @@ public class DatenVerwaltung implements SearchData, Serializable {
     /**
      * Löscht das angegebene Dokument aus der Liste der Dokumente.
      *
-     * @param dokument Das zu löschende Dokument
+     * @param zuLoeschendesDokument Das zu löschende Dokument
      */
-    public void deleteDokument(Dokument dokument){
+    public void deleteDokument(Dokument zuLoeschendesDokument){
         for (int i = 0; i < documents.size() ; i++) {
-            if (documents.get(i) ==dokument) {
+            if (documents.get(i).getName().equals(zuLoeschendesDokument.getName())
+                    && documents.get(i).getDatentyp().equals(zuLoeschendesDokument.getDatentyp())) {
                 documents.remove(i);
             }
         }
@@ -210,7 +217,10 @@ public class DatenVerwaltung implements SearchData, Serializable {
         List<Dokument> dokList = new ArrayList<>();
 
         Dokument test;
-        try (FileInputStream fis = new FileInputStream(getDBFilePath())) {
+
+        // mit getDBFilePath hat es nicht funktioniert!
+        // Hier muss src/main/save.txt als Pfad gesetzt sein (wie bei saveData())
+        try (FileInputStream fis = new FileInputStream("src/main/save.txt")) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
                 try {
                     while ((test = (Dokument) ois.readObject()) != null) {
