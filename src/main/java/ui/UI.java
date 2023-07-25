@@ -137,12 +137,24 @@ public class UI implements HandleUserEvent, Subscriber {
                     }
                     System.out.println();
                     System.out.println("Geben sie die Nummer des Dokuments an, das gelöscht werden soll.");
-                    String ausgewaehltesDokument = sc.nextLine();
 
+                    String ausgewaehltesDokument = sc.nextLine();
                     System.out.println();
-                    System.out.println("Soll dieses Dokument wirklich gelöscht werden?");
-                    System.out.println(ausgewaehltesDokument + ": " + bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)).getName());
-                    System.out.println("Geben Sie Ja oder Nein ein!");
+                    boolean erlaubt = false;
+                    while(!erlaubt) {
+
+                        try {
+
+                            System.out.println(ausgewaehltesDokument + ": " + bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)).getName());
+                            System.out.println("Soll dieses Dokument wirklich gelöscht werden?");
+                            System.out.println("Geben Sie Ja oder Nein ein!");
+                            erlaubt = true;
+                        } catch (IndexOutOfBoundsException ioobe) {
+                            System.out.println("Bitte wählen Sie eine andere Nummer");
+                            ausgewaehltesDokument = sc.nextLine();
+                        }
+
+                    }
                     String antwortLoeschen = sc.nextLine();
 
                    /* //index hier =0 gesetz weil es immer nur ein Suchergebnis geben kann!
