@@ -1,4 +1,3 @@
-
 package ui;
 
 import daten.DatenVerwaltung;
@@ -12,6 +11,7 @@ import java.util.Scanner;
 
 public class UI implements HandleUserEvent, Subscriber {
     private final String[] suchParameter = new String[5];
+    private final DatenVerwaltung datenVerwaltung = new DatenVerwaltung();
     system.EingabeVerarbeitung verarbeitung = new system.EingabeVerarbeitung();
     private String[] ausgabe;
     private String name;
@@ -22,7 +22,6 @@ public class UI implements HandleUserEvent, Subscriber {
     private String keyword;
     private String bezeichnungFormular;
     private String wertFormular;
-    private DatenVerwaltung datenVerwaltung= new DatenVerwaltung();
 
     public UI() {
 
@@ -49,6 +48,7 @@ public class UI implements HandleUserEvent, Subscriber {
      * fodert dann die nötigen Parameter, die für das ausführen der Aktion nötig sind.
      * Danach wird wieder vom System gefragt we
      * Wenn fünf eingegeben wird, wird das Programm beendet indem null returned wird.
+     *
      * @return null
      */
     public String menueAuswahl() {
@@ -118,7 +118,8 @@ public class UI implements HandleUserEvent, Subscriber {
                         "Wählen sie die 5 um das Programm zu beenden!"
                 );
                 eingabe = sc.nextLine();
-            }  if (eingabe.equals("4")) {
+            }
+            if (eingabe.equals("4")) {
 
 
                 /*System.out.println("Zuerst wird das Dokument gesucht, welches gelöscht werden soll. Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
@@ -129,16 +130,16 @@ public class UI implements HandleUserEvent, Subscriber {
                 }*/
 
                 List<Dokument> bestehendeDokumente = datenVerwaltung.readData();
-                if(!bestehendeDokumente.isEmpty()) {
-                    for(int i=0; i<bestehendeDokumente.size(); i++){
+                if (!bestehendeDokumente.isEmpty()) {
+                    for (int i = 0; i < bestehendeDokumente.size(); i++) {
                         Dokument aktuellesDok = bestehendeDokumente.get(i);
-                        System.out.println(i+1 + ": " + aktuellesDok.getName() + " - " + aktuellesDok.getDatum() + " - " + aktuellesDok.getDatentyp());
+                        System.out.println(i + 1 + ": " + aktuellesDok.getName() + " - " + aktuellesDok.getDatum() + " - " + aktuellesDok.getDatentyp());
                     }
-                    System.out.println("");
+                    System.out.println();
                     System.out.println("Geben sie die Nummer des Dokuments an, das gelöscht werden soll.");
                     String ausgewaehltesDokument = sc.nextLine();
 
-                    System.out.println("");
+                    System.out.println();
                     System.out.println("Soll dieses Dokument wirklich gelöscht werden?");
                     System.out.println(ausgewaehltesDokument + ": " + bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)).getName());
                     System.out.println("Geben Sie Ja oder Nein ein!");
@@ -152,15 +153,12 @@ public class UI implements HandleUserEvent, Subscriber {
                         verarbeitung.dateiLoeschen(bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)));
                         //verarbeitung.dateiLoeschen(suchErgebnis);
                         System.out.println("Dokument wurde erfolgreich gelöscht!");
-                        menueAuswahl();
                     } else if (antwortLoeschen.equalsIgnoreCase("nein")) {
                         System.out.println("Vorgang wird abgebrochen!");
-                        menueAuswahl();
                     }
-                } else{
+                } else {
                     System.out.println("Leider konnte kein Dokument gefunden werden!");
                     System.out.println("Bitte versuchen Sie es erneut!");
-                    menueAuswahl();
                 }
 
                 /*System.out.println("Geben sie die Nummer des Dokuments an, das gelöscht werden soll.");
@@ -168,18 +166,17 @@ public class UI implements HandleUserEvent, Subscriber {
                 verarbeitung.dateiLoeschen(treffer.get());*/
 
             }
-            else {
-                System.out.println("Bitte überprüfen Sie Ihre Eingabe!");
 
-                System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
-                        "Wählen sie die 2 um ein daten.Dokument zu öffnen!" + "\n" +
-                        "Wählen sie die 3 um ein daten.Dokument zu speichern!" + "\n" +
-                        "Wählen sie die 4 um ein daten.Dokument zu löschen!" + "\n" +
-                        "Wählen sie die 5 um das Programm zu beenden!"
-                );
-                eingabe = sc.nextLine();
+            System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
+                    "Wählen sie die 2 um ein daten.Dokument zu öffnen!" + "\n" +
+                    "Wählen sie die 3 um ein daten.Dokument zu speichern!" + "\n" +
+                    "Wählen sie die 4 um ein daten.Dokument zu löschen!" + "\n" +
+                    "Wählen sie die 5 um das Programm zu beenden!"
+            );
+            System.out.println("Geben sie hier ein was sie machen möchten: ");
+            eingabe = sc.nextLine();
 
-            }
+
         }
         return null;
     }
@@ -187,6 +184,7 @@ public class UI implements HandleUserEvent, Subscriber {
     /**
      * Die Methode erwartet vom Benutzer fünf Eingaben die vom System Kategorisiert abgefragt werden.
      * Die von User übergebenen Suchparamter werden anschließend in ein Suchparameter Array gespeichert.
+     *
      * @param name
      * @return String[] suchParamter
      */
@@ -219,9 +217,11 @@ public class UI implements HandleUserEvent, Subscriber {
         System.out.println("Die Suchparameterabfrage ist nun abgeschlossen!" + "\n");
         return suchParameter;
     }
+
     /**
      * Die Methode erwartet vom Benutzer fünf Eingaben die vom System Kategorisiert abgefragt werden.
      * Die von User übergebenen Suchparamter werden anschließend in ein Suchparameter Array gespeichert.
+     *
      * @return String[] suchParamter
      */
     public String[] suchparameterEingabeOhneName() {
@@ -257,14 +257,14 @@ public class UI implements HandleUserEvent, Subscriber {
      * @param index Die zu konvertierende Eingabe.
      * @return Der Index als Integer-Wert, oder -1, wenn der Index ungültig ist.
      */
-    public int löschIndex(String index){
-        int ausgabe=-1;
-      try {
-          ausgabe = (Integer.parseInt(index) - 1);
+    public int löschIndex(String index) {
+        int ausgabe = -1;
+        try {
+            ausgabe = (Integer.parseInt(index) - 1);
 
-      } catch (NumberFormatException NFE){
-          System.out.println("Bitte richtige Zahl eingeben.");
-      }
+        } catch (NumberFormatException NFE) {
+            System.out.println("Bitte richtige Zahl eingeben.");
+        }
         return ausgabe;
     }
 
