@@ -50,6 +50,20 @@ public class DatenVerwaltungTest {
 
         Assertions.assertEquals(datenVerwaltungZiel.hashCode(), datenVerwaltung.hashCode());
     }
+    @Test
+    void testDeleteDokument() {
+        List<Dokument> emptyDoks = new ArrayList<>();
+        String[][] emptyKeywords = new String[0][];
+        String[] emptyBezeichnung = new String[0];
+        String[] emptyWert = new String[0];
+
+        DatenVerwaltung datenVerwaltung = new DatenVerwaltung(emptyDoks, emptyKeywords, emptyBezeichnung, emptyWert);
+        emptyDoks.add(d1);
+        emptyDoks.add(d2);
+        datenVerwaltung.deleteDokument(d1);
+        Assertions.assertFalse(emptyDoks.contains(d1));
+
+    }
 
     @Test
     void saveAndReadData() {

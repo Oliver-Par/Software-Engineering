@@ -30,8 +30,16 @@ public class Dokument implements Serializable {
         return name + ", " + datentyp + ", " + datum + ", " + dateipfad;
     }
 
-    public Object getName() {
+    public String getName() {
         return name;
+    }
+
+    public String getDatentyp() {
+        return datentyp;
+    }
+
+    public String getDatum() {
+        return datum;
     }
 
     public String getDateipfad() {
