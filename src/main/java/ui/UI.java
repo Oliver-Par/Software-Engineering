@@ -65,8 +65,13 @@ public class UI implements HandleUserEvent, Subscriber {
 
                 System.out.println("Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
                 List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabeOhneName());
-                for (Dokument d : treffer) {
-                    System.out.println(d);
+
+                if(treffer.isEmpty()){
+                    System.out.println("Leider gibt es kein Dokument, das den angegebenen Keywords entspricht!");
+                }else {
+                    for (Dokument d : treffer) {
+                        System.out.println(d);
+                    }
                 }
             }
             if (eingabe.equals("2")) {

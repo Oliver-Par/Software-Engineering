@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EingabeVerarbeitung implements ManageInput {
@@ -68,13 +69,19 @@ public class EingabeVerarbeitung implements ManageInput {
      */
     public List<Dokument> suchergebnisAnzeigen(String[] zutreffendeKeywords) {
         List<Dokument> dokuments1 = datenVerwaltung.readData();
-        boolean treffer = false;
+        //boolean treffer = false;
         List<Dokument> zutreffendeDocuments = new ArrayList<>();
+
+
         for (Dokument document : dokuments1) {
             Formular formular = document.getFormular();
             String[] formularKeywords = formular.getKeyword();
-        try {
-            for (int n = 0; n < 5; n++) {
+
+            if(Arrays.equals(formularKeywords, zutreffendeKeywords)){
+                zutreffendeDocuments.add(document);
+            }
+        /*try {
+            *//*for (int n = 0; n < 5; n++) {
                 if (!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null) {
                     if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
                         treffer = true;
@@ -83,14 +90,14 @@ public class EingabeVerarbeitung implements ManageInput {
                         break;
                     }
                 }
-            }
+            }*//*
 
             if (treffer) {
                 zutreffendeDocuments.add(document);
             }
         } catch (NullPointerException NPE){
             System.out.println("Es konnte kein Suchergebnis gefunden werden");
-        }
+        }*/
         }
         return zutreffendeDocuments;
     }
