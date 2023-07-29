@@ -66,9 +66,9 @@ public class UI implements HandleUserEvent, Subscriber {
                 System.out.println("Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
                 List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabeOhneName());
 
-                if(treffer.isEmpty()){
+                if (treffer.isEmpty()) {
                     System.out.println("Leider gibt es kein Dokument, das den angegebenen Keywords entspricht!");
-                }else {
+                } else {
                     for (Dokument d : treffer) {
                         System.out.println(d);
                     }
@@ -116,13 +116,8 @@ public class UI implements HandleUserEvent, Subscriber {
                 if (erfolg) {
                     System.out.println("Das Anlegen war erfolgreich!");
                 }
-                System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
-                        "Wählen sie die 2 um ein daten.Dokument zu öffnen!" + "\n" +
-                        "Wählen sie die 3 um ein daten.Dokument zu speichern!" + "\n" +
-                        "Wählen sie die 4 um ein daten.Dokument zu löschen!" + "\n" +
-                        "Wählen sie die 5 um das Programm zu beenden!"
-                );
-                eingabe = sc.nextLine();
+                System.out.println("Das System wird jetzt beendet um die Aenderung zu sichern!!!");
+                break;
             }
             if (eingabe.equals("4")) {
 
@@ -146,7 +141,7 @@ public class UI implements HandleUserEvent, Subscriber {
                     String ausgewaehltesDokument = sc.nextLine();
                     System.out.println();
                     boolean erlaubt = false;
-                    while(!erlaubt) {
+                    while (!erlaubt) {
 
                         try {
 
