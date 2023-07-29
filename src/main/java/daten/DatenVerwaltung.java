@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DatenVerwaltung implements SearchData, Serializable {
     private final List<Formular> formulars;
-    private List<Dokument> documents;
+    private final List<Dokument> documents;
     private Dokument dok;
     private Formular form;
     private Subscriber[] subscribers;
@@ -38,14 +38,46 @@ public class DatenVerwaltung implements SearchData, Serializable {
             }
             n = -1;
         } else {
-            documents = new ArrayList<>();
-            formulars = new ArrayList<>();
+            documents = readData();
+            boolean notNull = false;
+            ArrayList<Formular> tempList = new ArrayList<>();
+            try {
+                for (Dokument d : documents) {
+                    tempList.add(d.getFormular());
+                    notNull = true;
+                }
+            } catch (NullPointerException epe) {
+
+            }
+            formulars = tempList;
         }
     }
 
     public DatenVerwaltung() {
         documents = new ArrayList<>();
         formulars = new ArrayList<>();
+    }
+
+    public static void initDB() {
+        try {
+            Files.createDirectories(Paths.get(DatenVerwaltung.getDBPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Files.createFile(Paths.get(DatenVerwaltung.getDBFilePath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getDBPath() throws IOException {
+        return new File(".").getCanonicalPath() + "\\data";
+    }
+
+    public static String getDBFilePath() throws IOException {
+        return DatenVerwaltung.getDBPath() + "\\" + "save.txt";
     }
 
     /**
@@ -61,10 +93,10 @@ public class DatenVerwaltung implements SearchData, Serializable {
      * Setzt das Formular für das angegebene Dokument mit den übergebenen Keywords, Bezeichnung und Wert gleich.
      * Fügt das Dokument und das Formular hinzu.
      *
-     * @param dokument   Das Dokument, für das das Formular gesetzt werden soll.
-     * @param keywords   Die Keywords für das Formular.
+     * @param dokument    Das Dokument, für das das Formular gesetzt werden soll.
+     * @param keywords    Die Keywords für das Formular.
      * @param bezeichnung Die Bezeichnung des Formulars.
-     * @param wert       Der Wert des Formulars.
+     * @param wert        Der Wert des Formulars.
      */
     public void setDokument(Dokument dokument, String[] keywords, String bezeichnung, String wert) {
         form = dokument.setFormular(keywords, bezeichnung, wert);
@@ -78,8 +110,8 @@ public class DatenVerwaltung implements SearchData, Serializable {
      *
      * @param zuLoeschendesDokument Das zu löschende Dokument
      */
-    public void deleteDokument(Dokument zuLoeschendesDokument){
-        for (int i = 0; i < documents.size() ; i++) {
+    public void deleteDokument(Dokument zuLoeschendesDokument) {
+        for (int i = 0; i < documents.size(); i++) {
             if (documents.get(i).getName().equals(zuLoeschendesDokument.getName())
                     && documents.get(i).getDatentyp().equals(zuLoeschendesDokument.getDatentyp())) {
                 documents.remove(i);
@@ -112,6 +144,12 @@ public class DatenVerwaltung implements SearchData, Serializable {
      * @return true wenn das Speichern erfolgreich war, sonst false.
      */
     public boolean saveData() {
+        /*List<Dokument> bereitsGespeichert = readData();
+        for (Dokument d : bereitsGespeichert) {
+            if (!documents.contains(d.getFormular().getKeyword())) {
+                setDokument(d, d.getFormular().getKeyword(), d.getFormular().getBezeichnung(), d.getFormular().getWert());
+            }
+        }*/
         try (FileOutputStream fos = new FileOutputStream("src/main/save.txt")) {
             try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 for (Dokument d : documents) {
@@ -138,28 +176,6 @@ public class DatenVerwaltung implements SearchData, Serializable {
             return false;
         }
         return true;
-    }
-
-    public static void initDB() {
-        try {
-            Files.createDirectories(Paths.get(getDBPath()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            Files.createFile(Paths.get(getDBFilePath()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static String getDBPath() throws IOException {
-        return new File(".").getCanonicalPath() + "\\data";
-    }
-
-    public static String getDBFilePath() throws IOException {
-        return getDBPath() + "\\" + "save.txt";
     }
  /*   public boolean deleteData() {
         List<Dokument> tempList = this.documents;
@@ -206,7 +222,6 @@ public class DatenVerwaltung implements SearchData, Serializable {
             return false;
         }
     } */
-
 
     /**
      * Liest die Daten der Dokumente und Fomulare aus einer Datei.
