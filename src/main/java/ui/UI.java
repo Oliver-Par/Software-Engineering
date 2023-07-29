@@ -65,8 +65,13 @@ public class UI implements HandleUserEvent, Subscriber {
 
                 System.out.println("Geben Sie nun die Keywords ein, die das Dokument haben soll. Soll ein Feld leer bleiben, drücken Sie einfach die Enter-Taste.");
                 List<Dokument> treffer = verarbeitung.suchergebnisAnzeigen(suchparameterEingabeOhneName());
-                for (Dokument d : treffer) {
-                    System.out.println(d);
+
+                if (treffer.isEmpty()) {
+                    System.out.println("Leider gibt es kein Dokument, das den angegebenen Keywords entspricht!");
+                } else {
+                    for (Dokument d : treffer) {
+                        System.out.println(d);
+                    }
                 }
             }
             if (eingabe.equals("2")) {
@@ -111,13 +116,8 @@ public class UI implements HandleUserEvent, Subscriber {
                 if (erfolg) {
                     System.out.println("Das Anlegen war erfolgreich!");
                 }
-                System.out.println("Wählen sie die 1 um ein daten.Dokument zu suchen!" + "\n" +
-                        "Wählen sie die 2 um ein daten.Dokument zu öffnen!" + "\n" +
-                        "Wählen sie die 3 um ein daten.Dokument zu speichern!" + "\n" +
-                        "Wählen sie die 4 um ein daten.Dokument zu löschen!" + "\n" +
-                        "Wählen sie die 5 um das Programm zu beenden!"
-                );
-                eingabe = sc.nextLine();
+                System.out.println("Das System wird jetzt beendet um die Aenderung zu sichern!!!");
+                break;
             }
             if (eingabe.equals("4")) {
 
@@ -137,12 +137,24 @@ public class UI implements HandleUserEvent, Subscriber {
                     }
                     System.out.println();
                     System.out.println("Geben sie die Nummer des Dokuments an, das gelöscht werden soll.");
-                    String ausgewaehltesDokument = sc.nextLine();
 
+                    String ausgewaehltesDokument = sc.nextLine();
                     System.out.println();
-                    System.out.println("Soll dieses Dokument wirklich gelöscht werden?");
-                    System.out.println(ausgewaehltesDokument + ": " + bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)).getName());
-                    System.out.println("Geben Sie Ja oder Nein ein!");
+                    boolean erlaubt = false;
+                    while (!erlaubt) {
+
+                        try {
+
+                            System.out.println(ausgewaehltesDokument + ": " + bestehendeDokumente.get(löschIndex(ausgewaehltesDokument)).getName());
+                            System.out.println("Soll dieses Dokument wirklich gelöscht werden?");
+                            System.out.println("Geben Sie Ja oder Nein ein!");
+                            erlaubt = true;
+                        } catch (IndexOutOfBoundsException ioobe) {
+                            System.out.println("Bitte wählen Sie eine andere Nummer");
+                            ausgewaehltesDokument = sc.nextLine();
+                        }
+
+                    }
                     String antwortLoeschen = sc.nextLine();
 
                    /* //index hier =0 gesetz weil es immer nur ein Suchergebnis geben kann!

@@ -52,6 +52,7 @@ public class EingabeVerarbeitung implements ManageInput {
 
     /**
      * Die Methode bestaetigung gibt false aus.
+     *
      * @return false
      */
     public boolean bestaetigung() {
@@ -63,6 +64,7 @@ public class EingabeVerarbeitung implements ManageInput {
      * Für jedes Dokument werden die Formular und dann deren FormularKeywords gespeichert.
      * Die Keywords werden auf übereinstimmung verglichen und wenn es einen treffer gibt wird
      * der Liste aus Dokumenten das document hinzugefügt.
+     *
      * @param zutreffendeKeywords
      * @return die auf die Keywords zutreffenden Dokumente
      */
@@ -70,44 +72,47 @@ public class EingabeVerarbeitung implements ManageInput {
         List<Dokument> dokuments1 = datenVerwaltung.readData();
         boolean treffer = false;
         List<Dokument> zutreffendeDocuments = new ArrayList<>();
+
+
         for (Dokument document : dokuments1) {
             Formular formular = document.getFormular();
             String[] formularKeywords = formular.getKeyword();
-        try {
-            for (int n = 0; n < 5; n++) {
-                if (!zutreffendeKeywords[n].equals("") || zutreffendeKeywords[n] != null) {
-                    if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
-                        treffer = true;
-                    } else {
-                        treffer = false;
-                        break;
+
+            try {
+                for (int n = 0; n < 5; n++) {
+                    if (zutreffendeKeywords[n] != null) {
+                        if (zutreffendeKeywords[n].equals(formularKeywords[n]) || zutreffendeKeywords[n].equals("")) {
+                            treffer = true;
+                        } else {
+                            treffer = false;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (treffer) {
-                zutreffendeDocuments.add(document);
+                if (treffer) {
+                    zutreffendeDocuments.add(document);
+                }
+            } catch (NullPointerException NPE) {
+                System.out.println("Es konnte kein Suchergebnis gefunden werden");
             }
-        } catch (NullPointerException NPE){
-            System.out.println("Es konnte kein Suchergebnis gefunden werden");
-        }
         }
         return zutreffendeDocuments;
     }
 
     /**
+     * @param dokumentenName
      * @author Arber Krasniqi
      * Die Methode bekommt einen Dokumentennamen übergeben. Die Methode prüft ob es ein Dokument mit
      * dem Namen gespeichert vorliegt. Wenn das Dokument existiert wird es geöffnet.
-     * @param dokumentenName
      */
 
-    public void dateiOeffnen(String dokumentenName){
+    public void dateiOeffnen(String dokumentenName) {
         List<Dokument> dokList = datenVerwaltung.readData();
         Dokument zutreffendesDokument;
         String path = "";
-        for (int i = 0; i<dokList.size(); i++){
-            if(dokList.get(i).getName().equals(dokumentenName)){
+        for (int i = 0; i < dokList.size(); i++) {
+            if (dokList.get(i).getName().equals(dokumentenName)) {
                 zutreffendesDokument = dokList.get(i);
                 path = zutreffendesDokument.getDateipfad();
             }
@@ -127,6 +132,7 @@ public class EingabeVerarbeitung implements ManageInput {
             System.out.println("Datei kann nicht geöffnet werden.");
         }
     }
+
     /**
      * Löscht das angegebene Dokument aus der Datei und speichert diese.
      *
