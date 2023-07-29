@@ -4,7 +4,7 @@ import daten.Dokument;
 import daten.Formular;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DokumentTest {
     private final Dokument dokument = new Dokument("Testdokument", "PDF", "2023-06-24", "Pfad");
